@@ -35,6 +35,15 @@ app.get('/allusers', function(req, res) {
   });
 });
 
+app.delete('/delete/:id', function(req, res){
+  UserInfo.findByIdRemove(req.params.id, function (err, todo) {
+    var response = {
+        message: "Todo successfully deleted",
+        id: todo._id
+    };
+    res.send(response);
+})
+
 //request to fire out get to GitHub user profile
 app.get('/user/:username', function(req, res) {
   //get user name and extend headers to add at time of request
