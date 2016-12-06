@@ -90,3 +90,6 @@ function addUserInfo(body, name){
     }
   });
 }
+
+module.exports = User;
+module.exports = UserInfo;

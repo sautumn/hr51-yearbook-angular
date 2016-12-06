@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var options = require('./config/user-options.json');
 var request = require('request');
 
+var User = require('./api-helpers.js');
+var UserInfo = require('./api-helpers.js');
+
 var underscoreDeepExtend = require('underscore-deep-extend');
 var _ = require('lodash');
 _.mixin({deepExtend: underscoreDeepExtend(_)});
@@ -20,7 +23,17 @@ app.use(bodyParser.json({ type: 'application/json' }));
 
 app.get('/', function(req, res) {
   res.send('index.html');
-})
+});
+
+app.get('/allusers', function(req, res) {
+  User.find(function(error, users) {
+    if (error) {
+      res.send(error);
+    } else {
+      res.send(JSON.stringify(users));
+    }
+  });
+});
 
 //request to fire out get to GitHub user profile
 app.get('/user/:username', function(req, res) {
