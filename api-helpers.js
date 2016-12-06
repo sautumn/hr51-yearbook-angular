@@ -51,11 +51,10 @@ var UserInfo = mongoose.model('UserInfo', userInfoSchema);
       dbData.forEach(function(element){
         element.save(function(err, resolve) {
           if (err) {
-            // console.log(element.name);
-            // console.log('Member already exists.');
+            console.log('Member already exists.');
           } else {
             addUserInfo(body, element.name);
-            // console.log('Successfully inserted into database.')
+            console.log('Successfully inserted into database.')
           }
         });
       });
@@ -83,9 +82,7 @@ function addUserInfo(body, name){
       });
       newUserInfo.save(function(err, resolve){
         if (err){
-          // console.log(err);
-
-          // console.log('User info failed to save or entry already exists');
+          console.log('User info failed to save or entry already exists');
         } else {
           console.log('Successfully inserted into user info into database.');
         }

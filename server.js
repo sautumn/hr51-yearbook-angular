@@ -16,6 +16,13 @@ app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/json' }));
 
+
+
+app.get('/', function(req, res) {
+  res.send('index.html');
+})
+
+//request to fire out get to GitHub user profile
 app.get('/user/:username', function(req, res) {
   //get user name and extend headers to add at time of request
   var userOptions = _.deepExtend(options, {url: "https://api.github.com/users/" + req.params.username});
