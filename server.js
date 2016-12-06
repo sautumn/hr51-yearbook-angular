@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/allusers', function(req, res) {
-  User.find(function(error, users) {
+  UserInfo.find(function(error, users) {
     if (error) {
       res.send(error);
     } else {
@@ -46,4 +46,4 @@ app.get('/user/:username', function(req, res) {
 });
 
 app.listen(8080);
-console.log("App listening on port 8080");
+console.log("App listening on port 8000");
