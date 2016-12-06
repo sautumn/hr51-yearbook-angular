@@ -4,6 +4,7 @@ var options = require('./config/options.json');
 var server = require('./server.js');
 var underscoreDeepExtend = require('underscore-deep-extend');
 var Schema = mongoose.Schema;
+var request = require('request');
 
 var _ = require('lodash');
 _.mixin({deepExtend: underscoreDeepExtend(_)});
@@ -15,14 +16,29 @@ var userSchema = new Schema({
   id: Number,
 });
 
-var User = mongoose.model('User', userSchema);
+var userInfoSchema = new Schema({
+  name: { type : String , unique : true, required : true },
+  fullname: String,
+  company: String,
+  blog: String,
+  location: String,
+  email: String,
+  hireable: String,
+  bio: String,
+  publicRepos: Number,
+  followers: Number,
+  following: Number,
+  memberSince: String,
+});
 
-//get all users from teams
+var User = mongoose.model('User', userSchema);
+var UserInfo = mongoose.model('UserInfo', userInfoSchema);
+
+//get all users from teams, add to db
 [1, 2].forEach(function(page){
   var pageRequests = _.deepExtend(options, {qs: {page: page}});
   request(pageRequests, function (error, response, body) {
     if (error) throw new Error(error);
-    console.log(pageRequests);
     var dbData = JSON.parse(body).map(function(element) {
       return new User(
         {
@@ -35,11 +51,45 @@ var User = mongoose.model('User', userSchema);
       dbData.forEach(function(element){
         element.save(function(err, resolve) {
           if (err) {
-            console.log('already exists');
+            // console.log(element.name);
+            // console.log('Member already exists.');
           } else {
-            console.log('inserted data into db')
+            addUserInfo(body, element.name);
+            // console.log('Successfully inserted into database.')
           }
-        })
-      })
+        });
+      });
     });
-})
+});
+
+function addUserInfo(body, name){
+  request('http://localhost:8080/user/' + name, function (error, response) {
+    if (!error && response.statusCode == 200) {
+      var element = JSON.parse(response.body);
+      console.log(element);
+      var newUserInfo =  new UserInfo({
+        name: element.name,
+        fullname: element.name,
+        company: element.company,
+        blog: element.blog,
+        location: element.location,
+        email: element.email,
+        hireable: element.hireable,
+        bio: element.bio,
+        publicRepos: element.public_repos,
+        followers: element.followers,
+        following: element.following,
+        memberSince: element.created_at,
+      });
+      newUserInfo.save(function(err, resolve){
+        if (err){
+          // console.log(err);
+
+          // console.log('User info failed to save or entry already exists');
+        } else {
+          console.log('Successfully inserted into user info into database.');
+        }
+      });
+    }
+  });
+}
