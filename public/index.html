@@ -56,14 +56,31 @@
             </tr>
         </table>
       </div>
-
+<div>
     <div ng-hide="stats()" ng-show="followers()">
-      <div ng-repeat="data in follow | filter:search">
-        <h3>Most Followers</h3>
+      <div class="col-md-4">
+      <h2 class="text-center">Most Followers</h2>
+      <div ng-repeat="data in follow | filter:search" class="text-center">
         {{data.name}} has {{data.followers}} followers.
       </div>
-      <div ng-bind-html="htmlString"></div>
-    <div>
+    </div>
 
+      <div class="col-md-4">
+      <h2 class="text-center">Most Repos</h2>
+      {{mostRepos()}}
+        <div ng-repeat="data in repos | filter:search" class="text-center">
+        {{data.name}} has {{data.publicRepos}} public repos.
+      </div>
+    </div>
+
+      <div class="col-md-4">
+      <h2 class="text-center">Oldest Github Profile</h2>
+      {{oldestRepos()}}
+        <div ng-repeat="data in old | filter:search" class="text-center">
+        {{data.name}} has been on GitHub since {{data.memberSince}}.
+      </div>
+    </div>
+    <div>
+<div>
   </body>
 </html>

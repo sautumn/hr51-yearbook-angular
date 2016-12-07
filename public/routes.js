@@ -5,9 +5,11 @@ angular.module('app', [])
        $scope.greeting = "Hello World";
        $scope.bool = true;
        $scope.follow = [];
+       $scope.repos = [];
+       $scope.old = [];
 
        $scope.clicked = function(data){
-         console.log(data);
+        //  console.log(data);
        }
 
        $http({
@@ -22,18 +24,37 @@ angular.module('app', [])
 
 
           $scope.stats = function(){
-            console.log($scope.bool);
+            // console.log($scope.bool);
             return $scope.bool = !$scope.bool;
           }
 
           $scope.followers = function(){
             var array = []
             var x = _.sortBy($scope.data.data, function(items) { return -items.followers; });
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i < 10; i++) {
               array.push(x[i]);
             }
             $scope.follow = array;
           }
 
+          $scope.mostRepos = function(){
+            var array = []
+            var x = _.sortBy($scope.data.data, function(items) { return -items.publicRepos; });
+            for (var i = 0; i < 10; i++) {
+              array.push(x[i]);
+            }
+            console.log($scope.repos);
+            $scope.repos = array;
+          }
+
+          $scope.oldestRepos = function(){
+            var array = []
+            var x = _.sortBy($scope.data.data, function(items) { return items.memberSince; });
+            for (var i = 0; i < 10; i++) {
+              array.push(x[i]);
+            }
+            console.log($scope.repos);
+            $scope.old = array;
+          }
 
 });
