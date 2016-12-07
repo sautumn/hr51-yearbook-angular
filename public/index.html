@@ -48,7 +48,7 @@
                     <button ng-controller="app" ng-click="clicked(data)" class="btn btn-danger pull-right">Delete</button>
                   </div>
                   <img src="{{data.image}}" height="80px" width="80px">
-                <h4>{{data.name}}</h4>
+                <a href={{data.name}}><h4>{{data.name}}</h4></a>
               <!-- <img src="{{data.image}}"> -->
               <small class="summary">{{data.bio}} {{data.location}} {{data.company}}</small>
               <small class="pull-right"> Public Repos: {{data.publicRepos}} | Followers: {{data.followers}} | Following: {{data.following}}</small>

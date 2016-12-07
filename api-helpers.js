@@ -18,6 +18,7 @@ var userSchema = new Schema({
 
 var userInfoSchema = new Schema({
   name: { type : String , unique : true, required : true },
+  login: String,
   image: String,
   fullname: String,
   company: String,
@@ -69,6 +70,7 @@ function addUserInfo(body, name){
       console.log(element);
       var newUserInfo =  new UserInfo({
         name: element.name,
+        login: element.login,
         image: element.avatar_url,
         fullname: element.name,
         company: element.company,

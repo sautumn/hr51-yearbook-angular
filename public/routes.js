@@ -9,7 +9,7 @@ angular.module('app', [])
        $scope.old = [];
 
        $scope.clicked = function(data){
-        //  console.log(data);
+         console.log(data);
        }
 
        $http({
