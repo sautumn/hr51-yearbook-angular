@@ -10,7 +10,7 @@ angular.module('app', [])
 
        $scope.clicked = function(data){
 
-         console.log(data);
+        //  console.log(data);
        }
 
        $http({
@@ -26,7 +26,7 @@ angular.module('app', [])
 
           $scope.stats = function(){
             // console.log($scope.bool);
-            // !$event.stopPropagation();
+            // $event.stopPropagation();
             return $scope.bool = !$scope.bool;
           }
 
@@ -54,7 +54,7 @@ angular.module('app', [])
             for (var i = 0; i < 10; i++) {
               array.push(x[i]);
             }
-            console.log($scope.repos);
+            // console.log($scope.repos);
             $scope.old = array;
           }
 
