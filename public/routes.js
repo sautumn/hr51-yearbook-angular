@@ -9,6 +9,7 @@ angular.module('app', [])
        $scope.old = [];
 
        $scope.clicked = function(data){
+
          console.log(data);
        }
 
@@ -25,6 +26,7 @@ angular.module('app', [])
 
           $scope.stats = function(){
             // console.log($scope.bool);
+            // !$event.stopPropagation();
             return $scope.bool = !$scope.bool;
           }
 
@@ -43,7 +45,6 @@ angular.module('app', [])
             for (var i = 0; i < 10; i++) {
               array.push(x[i]);
             }
-            console.log($scope.repos);
             $scope.repos = array;
           }
 

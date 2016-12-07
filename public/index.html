@@ -1,6 +1,7 @@
 <!doctype html>
 
 <head>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <!-- <script type="text/javascript" src="/node_modules/angular/angular.js"></script> -->
@@ -15,9 +16,9 @@
 <!-- <div> -->
  <body ng-app="app" ng-controller="app">
     <div class="navbar navbar-fixed-top">
-        <a class="navbar-brand" href="/">Stats</a>
+        <a background="solid" class="navbar-brand" href="/">Stats</a>
         <ul class="nav navbar-nav">
-            <li><a href="#" ng-click="stats()" id="statistics">Search</a></li>
+            <li><a href="" ng-click="stats(); $event.stopPropagation();" id="statistics" >Search</a></li>
         </ul>
     </div>
     <div class="container" style="padding-top: 60px">
@@ -31,7 +32,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="input-group" >
-                <input type='text' placeholder="Search Links" ng-model='search.$' class="form-control SearchBar" placeholder="Search for...">
+                <input type='text' placeholder="Search all members..." ng-model='search.$' class="form-control SearchBar" placeholder="Search for...">
                 <span class="input-group-btn">
                   <button class="btn btn-defaul SearchButton" type="button">
                       <span class=" glyphicon glyphicon-search SearchIcon" ></span>
@@ -45,11 +46,11 @@
               <tr ng-repeat="data in data.data | filter:search">
                 <td>
                   <div class="pull-right">
-                    <button ng-controller="app" ng-click="clicked(data)" class="btn btn-danger pull-right">Delete</button>
+                    <a href={{'/delete/'+data._id}} class="btn btn-danger pull-right">Delete</a>
+                    <a href={{'/delete/'+data._id}}><button ng-controller="app" ng-click="clicked(data)" class="btn btn-success pull-right">Edit</button></a>
                   </div>
                   <img src="{{data.image}}" height="80px" width="80px">
-                <a href={{data.name}}><h4>{{data.name}}</h4></a>
-              <!-- <img src="{{data.image}}"> -->
+                <a href={{'/user/'+data.login}}><h4>{{data.name}}</h4></a>
               <small class="summary">{{data.bio}} {{data.location}} {{data.company}}</small>
               <small class="pull-right"> Public Repos: {{data.publicRepos}} | Followers: {{data.followers}} | Following: {{data.following}}</small>
             </td>

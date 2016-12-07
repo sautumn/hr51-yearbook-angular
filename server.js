@@ -35,13 +35,13 @@ app.get('/allusers', function(req, res) {
   });
 });
 
-app.delete('/delete/:id', function(req, res){
-  UserInfo.findByIdRemove(req.params.id, function (err, todo) {
+app.get('/delete/:id', function(req, res){
+  UserInfo.findByIdAndRemove(req.params.id, function (err, todo) {
     var response = {
-        message: "Todo successfully deleted",
-        id: todo._id
+        message: "User successfully deleted",
+        id: req.params.id
     };
-    res.send(response);
+    res.redirect('/');
   });
 });
 
