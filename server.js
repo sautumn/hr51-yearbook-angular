@@ -42,7 +42,8 @@ app.delete('/delete/:id', function(req, res){
         id: todo._id
     };
     res.send(response);
-})
+  });
+});
 
 //request to fire out get to GitHub user profile
 app.get('/user/:username', function(req, res) {
